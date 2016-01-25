@@ -1,0 +1,11 @@
+name: LearnCraft
+version: 1.0
+author: TorchPowered
+main: org.learncraft.PluginCore
+commands:
+    assignments:
+      description: Shows all of the assignments the teacher has assigned.
+      usage: "Usage: /assignments"
+    assignment:
+      description: Shows specific information about a assignment.
+      usage: "Usage: /assignment <assignmentname>"
