@@ -1,0 +1,13 @@
+group 'net.torchpowered'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots" }
+}
+
+dependencies {
+    compile 'org.bukkit:bukkit:1.8-R0.1-SNAPSHOT'
+}
