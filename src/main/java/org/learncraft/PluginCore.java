@@ -18,6 +18,5 @@ public final class PluginCore extends JavaPlugin {
         LOGGER = getLogger();
 
         LOGGER.info("Loading LearnCraft, please wait...");
-
     }
 }
