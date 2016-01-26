@@ -15,6 +15,7 @@ import org.learncraft.gui.MainMenuFrame;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -49,13 +50,7 @@ public final class PluginCore extends JavaPlugin {
 
         // setup files
         if(!LearnCraftFiles.LEARNCRAFT_FOLDER.exists()) {
-            try {
-                LearnCraftFiles.LEARNCRAFT_FOLDER.getFile().createNewFile();
-            } catch (IOException e) {
-                errorSequence();
-                e.printStackTrace();
-                return;
-            }
+           LearnCraftFiles.LEARNCRAFT_FOLDER.getFile().mkdir();
             try {
                 LearnCraftFiles.LEARNCRAFT_SETTINGS_FILE.getFile().createNewFile();
             } catch (IOException e) {
@@ -77,9 +72,8 @@ public final class PluginCore extends JavaPlugin {
         this.assignmentManager = new LearnCraftAssignments(LearnCraftFiles.LEARNCRAFT_ASSIGNMENTS_FILE.getFile());
 
         LOGGER.info("Loading LearnCraft interface components...");
-
         try {
-            FileUtils.copyURLToFile(getClassLoader().getResource("minecraft-font.tff"), LearnCraftFiles.LEARNCRAFT_FONT_FILE.getFile());
+            FileUtils.copyURLToFile(getClass().getClassLoader().getResource("minecraft-font.ttf"), LearnCraftFiles.LEARNCRAFT_FONT_FILE.getFile());
         } catch (IOException e) {
             errorSequence();
             e.printStackTrace();

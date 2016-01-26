@@ -2,14 +2,11 @@ package org.learncraft.configuration;
 
 import org.learncraft.configuration.assignment.Assignment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
+import java.util.HashMap;
 
 /**
  * Represents LearnCraft's assignment manager.
@@ -18,32 +15,47 @@ import java.util.Properties;
  * @author Open-source contributors to LearnCraft
  */
 public class LearnCraftAssignments {
-    private Properties properties;
+    private ArrayList<Assignment> properties;
     private File fileToSave;
+
+    public static void formatToAssignmentsDataFormat(File file) {
+        ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+        try {
+            FileOutputStream stream = new FileOutputStream(file);
+            ObjectOutputStream stream1 = new ObjectOutputStream(stream);
+            stream1.writeObject(assignments);
+            stream1.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public LearnCraftAssignments(File fileToSaveTo) {
         this.fileToSave = fileToSaveTo;
-        this.properties = new Properties();
+        this.properties = new ArrayList<Assignment>();
         try {
-            properties.load(new FileInputStream(fileToSaveTo));
-        } catch (IOException e) {
-            e.printStackTrace();
+            FileInputStream fileInputStream = new FileInputStream(fileToSaveTo);
+            ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
+            properties = (ArrayList<Assignment>) inputStream.readObject();
+            inputStream.close();
+        } catch (Exception e) {
+            formatToAssignmentsDataFormat(fileToSaveTo);
         }
     }
 
     public void save() {
         try {
-            properties.store(new FileOutputStream(fileToSave), null);
-        } catch (IOException e) {
+            FileOutputStream stream = new FileOutputStream(fileToSave);
+            ObjectOutputStream stream1 = new ObjectOutputStream(stream);
+            stream1.writeObject(properties);
+            stream1.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public ArrayList<Assignment> getAssignmentList() {
-        if(properties.get("assignments") == null) {
-            return new ArrayList<Assignment>();
-        }
-        return (ArrayList<Assignment>) properties.get("assignments");
+        return properties;
     }
 
     public static SimpleDateFormat getDateFormat() {
@@ -57,7 +69,6 @@ public class LearnCraftAssignments {
     public void newAssignment(String name, String description, Date date) {
         ArrayList<Assignment> assignments = getAssignmentList();
         assignments.add(new Assignment(name, description, date));
-        properties.put("assignments", assignments);
         save();
     }
 
@@ -77,7 +88,6 @@ public class LearnCraftAssignments {
         Assignment assignment = getAssignment(assignmentName);
         ArrayList<Assignment> assignments = getAssignmentList();
         assignments.remove(assignment);
-        properties.put("assignments", assignments);
         save();
     }
 }

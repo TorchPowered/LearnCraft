@@ -1,5 +1,6 @@
 package org.learncraft.configuration.assignment;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @since 1.0-SNAPSHOT
  * @author Open-source contributors to LearnCraft
  */
-public class Assignment {
+public class Assignment implements Serializable {
     private Date due;
     private String name;
     private String description;

@@ -25,7 +25,7 @@ public enum LearnCraftFiles {
     }
 
     LearnCraftFiles(LearnCraftFiles location, String fileName) {
-        this.parentFile = location.getParentFile();
+        this.parentFile = location.getFile();
         this.fileName = fileName;
     }
 

@@ -34,6 +34,12 @@ public class MainMenuFrame extends JFrame {
         }
     }
 
+    private void button1ActionPerformed(ActionEvent e) {
+        setVisible(false);
+        StudentMainMenuFrame studentMainMenuFrame = new StudentMainMenuFrame();
+        studentMainMenuFrame.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Gary Lee
@@ -69,6 +75,12 @@ public class MainMenuFrame extends JFrame {
         //---- button1 ----
         button1.setText("Manage your students");
         button1.setFont(new Font("Minecraftia", Font.PLAIN, 12));
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button1ActionPerformed(e);
+            }
+        });
         contentPane.add(button1);
         button1.setBounds(0, 95, 580, 35);
 

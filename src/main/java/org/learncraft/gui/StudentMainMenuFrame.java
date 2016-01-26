@@ -65,6 +65,13 @@ public class StudentMainMenuFrame extends JFrame {
         }
     }
 
+    public void reloadPlayerList() {
+        listModel.clear();
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            listModel.addElement(player.getDisplayName());
+        }
+    }
+
     private void button2ActionPerformed(ActionEvent e) {
         BroadcastMessageDialog dialog = new BroadcastMessageDialog(this);
         dialog.setVisible(true);
