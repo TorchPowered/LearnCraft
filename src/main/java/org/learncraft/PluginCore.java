@@ -108,7 +108,7 @@ public final class PluginCore extends JavaPlugin {
             ArrayList<Assignment> assignments = new LearnCraftAssignments(LearnCraftFiles.LEARNCRAFT_ASSIGNMENTS_FILE.getFile()).getAssignmentList();
             StringBuilder builder = new StringBuilder();
             for (Assignment assignment : assignments) {
-                builder.append(assignment + ", ");
+                builder.append(assignment.getName() + ", ");
             }
             String finalString = ChatColor.GOLD + "Assignments: " + ChatColor.RESET + builder.toString();
             sender.sendMessage(finalString);

@@ -8,6 +8,7 @@ import java.awt.event.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.learncraft.gui.dialog.BroadcastMessageDialog;
+import org.learncraft.gui.dialog.BroadcastTitleMessageDialog;
 
 import java.awt.*;
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class StudentMainMenuFrame extends JFrame {
     public static boolean isChatEnabled = true;
 
     public StudentMainMenuFrame() {
+        listModel.clear();
         initComponents();
         list1.setModel(listModel);
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -52,17 +54,19 @@ public class StudentMainMenuFrame extends JFrame {
                 button1.setEnabled(true);
             }
         });
+        if(!isChatEnabled) {
+            button3.setText("Enable Student Chat");
+        }
     }
 
     private void button3ActionPerformed(ActionEvent e) {
         if(button3.getText().equals("Disable Student Chat")){
             button3.setText("Enable Student Chat");
             isChatEnabled = false;
+            return;
         }
-        if(button3.getText().equals("Enable Student Chat")){
-            button3.setText("Disable Student Chat");
-            isChatEnabled = true;
-        }
+        button3.setText("Disable Student Chat");
+        isChatEnabled = true;
     }
 
     public void reloadPlayerList() {
@@ -83,6 +87,20 @@ public class StudentMainMenuFrame extends JFrame {
         mainMenuFrame.setVisible(true);
     }
 
+    private void button6ActionPerformed(ActionEvent e) {
+        reloadPlayerList();
+    }
+
+    private void button4ActionPerformed(ActionEvent e) {
+        BroadcastTitleMessageDialog dialog = new BroadcastTitleMessageDialog(this);
+        dialog.setVisible(true);
+    }
+
+    private void button1ActionPerformed(ActionEvent e) {
+        StudentProfileFrame profileFrame = new StudentProfileFrame((String)list1.getSelectedValue());
+        profileFrame.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Gary Lee
@@ -95,9 +113,11 @@ public class StudentMainMenuFrame extends JFrame {
         button3 = new JButton();
         button4 = new JButton();
         button5 = new JButton();
+        button6 = new JButton();
 
         //======== this ========
         setTitle("LearnCraft - Student Control");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -129,6 +149,12 @@ public class StudentMainMenuFrame extends JFrame {
         button1.setText("View Student Profile");
         button1.setFont(new Font("Minecraftia", Font.PLAIN, 12));
         button1.setEnabled(false);
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button1ActionPerformed(e);
+            }
+        });
         contentPane.add(button1);
         button1.setBounds(0, 380, 395, 30);
 
@@ -159,6 +185,12 @@ public class StudentMainMenuFrame extends JFrame {
         //---- button4 ----
         button4.setText("Broadcast Title Message");
         button4.setFont(new Font("Minecraftia", Font.PLAIN, 12));
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button4ActionPerformed(e);
+            }
+        });
         contentPane.add(button4);
         button4.setBounds(0, 485, 395, 30);
 
@@ -172,7 +204,19 @@ public class StudentMainMenuFrame extends JFrame {
             }
         });
         contentPane.add(button5);
-        button5.setBounds(90, 540, 215, 40);
+        button5.setBounds(90, 560, 215, 40);
+
+        //---- button6 ----
+        button6.setText("Refresh Student List");
+        button6.setFont(new Font("Minecraftia", Font.PLAIN, 12));
+        button6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                button6ActionPerformed(e);
+            }
+        });
+        contentPane.add(button6);
+        button6.setBounds(0, 520, 395, 30);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -203,5 +247,6 @@ public class StudentMainMenuFrame extends JFrame {
     private JButton button3;
     private JButton button4;
     private JButton button5;
+    private JButton button6;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

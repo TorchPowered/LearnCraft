@@ -19,7 +19,7 @@ import javax.swing.*;
  * @author Gary Lee
  */
 public class StudentProfileFrame extends JFrame {
-    public ArrayList<Player> mutedPlayers = new ArrayList<Player>();
+    public static ArrayList<Player> mutedPlayers = new ArrayList<Player>();
 
     private String studentName;
     private Player player;
@@ -30,6 +30,11 @@ public class StudentProfileFrame extends JFrame {
         initComponents();
         setTitle("Student Profile - " + studentName);
         label1.setText(this.studentName);
+        for (Player mutedPlayer : mutedPlayers) {
+            if(this.player == mutedPlayer) {
+                button3.setText("Unmute Student Chat");
+            }
+        }
     }
 
     private void button5ActionPerformed(ActionEvent e) {
@@ -93,6 +98,7 @@ public class StudentProfileFrame extends JFrame {
         //---- button1 ----
         button1.setText("Kick from Session");
         button1.setFont(new Font("Minecraftia", Font.PLAIN, 16));
+        button1.setEnabled(false);
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

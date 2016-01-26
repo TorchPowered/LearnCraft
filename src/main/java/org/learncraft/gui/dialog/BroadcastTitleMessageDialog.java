@@ -42,6 +42,7 @@ public class BroadcastTitleMessageDialog extends JDialog {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 Utilities.sendTitle(player, 20, 20, 20, title, subtitle);
             }
+            setVisible(false);
             return;
         }
         String title = textField1.getText();

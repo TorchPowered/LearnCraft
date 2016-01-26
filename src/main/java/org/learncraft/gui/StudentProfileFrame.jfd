@@ -31,6 +31,7 @@ new FormModel {
 				name: "button1"
 				"text": "Kick from Session"
 				"font": &Font0 new java.awt.Font( "Minecraftia", 0, 16 )
+				"enabled": false
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
