@@ -125,7 +125,7 @@ public class AddAssignmentDialog extends JDialog {
                 scrollPane1.setBounds(15, 65, 330, 90);
 
                 //---- label3 ----
-                label3.setText("Date (please follow format: month/day/year)");
+                label3.setText("Due Date (please follow format: month/day/year)");
                 contentPanel.add(label3);
                 label3.setBounds(new Rectangle(new Point(15, 160), label3.getPreferredSize()));
                 contentPanel.add(textField2);

@@ -48,7 +48,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label3"
-						"text": "Date (please follow format: month/day/year)"
+						"text": "Due Date (please follow format: month/day/year)"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 15
 						"y": 160
